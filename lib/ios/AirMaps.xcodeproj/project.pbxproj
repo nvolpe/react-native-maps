@@ -59,6 +59,8 @@
 		B5EA3BA92098E22B000E7AFD /* AIRDummyView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5EA3BA72098E22B000E7AFD /* AIRDummyView.m */; };
 		DA6C26381C9E2AFE0035349F /* AIRMapUrlTile.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C26371C9E2AFE0035349F /* AIRMapUrlTile.m */; };
 		DA6C263E1C9E324A0035349F /* AIRMapUrlTileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA6C263D1C9E324A0035349F /* AIRMapUrlTileManager.m */; };
+		F23A22A325B68433004C71E3 /* AirMaps_tvos.m in Sources */ = {isa = PBXBuildFile; fileRef = F23A22A225B68433004C71E3 /* AirMaps_tvos.m */; };
+		F23A22A425B68433004C71E3 /* AirMaps_tvos.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = F23A22A125B68433004C71E3 /* AirMaps_tvos.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -68,6 +70,16 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F23A229D25B68433004C71E3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				F23A22A425B68433004C71E3 /* AirMaps_tvos.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -179,10 +191,20 @@
 		DA6C26371C9E2AFE0035349F /* AIRMapUrlTile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapUrlTile.m; sourceTree = "<group>"; };
 		DA6C263C1C9E324A0035349F /* AIRMapUrlTileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRMapUrlTileManager.h; sourceTree = "<group>"; };
 		DA6C263D1C9E324A0035349F /* AIRMapUrlTileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRMapUrlTileManager.m; sourceTree = "<group>"; };
+		F23A229F25B68433004C71E3 /* libAirMaps-tvos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAirMaps-tvos.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F23A22A125B68433004C71E3 /* AirMaps_tvos.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AirMaps_tvos.h; sourceTree = "<group>"; };
+		F23A22A225B68433004C71E3 /* AirMaps_tvos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirMaps_tvos.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		11FA5C4E1C4A1296003AC2EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F23A229C25B68433004C71E3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -198,6 +220,7 @@
 				9B9498A32017EF9D00158761 /* AirGoogleMaps */,
 				62AEC4D31FD5A0AA003225E0 /* AIRMapLocalTileOverlay.m */,
 				11FA5C531C4A1296003AC2EE /* AirMaps */,
+				F23A22A025B68433004C71E3 /* AirMaps-tvos */,
 				11FA5C521C4A1296003AC2EE /* Products */,
 				8BC85FAD2107C0BD0006CEA5 /* User.xcconfig */,
 			);
@@ -207,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				11FA5C511C4A1296003AC2EE /* libAirMaps.a */,
+				F23A229F25B68433004C71E3 /* libAirMaps-tvos.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,7 +258,6 @@
 				1125B2C91C4AD3DA007D0023 /* AIRMapManager.h */,
 				1125B2CA1C4AD3DA007D0023 /* AIRMapManager.m */,
 				1125B2CB1C4AD3DA007D0023 /* AIRMapMarker.h */,
-				1125B2CC1C4AD3DA007D0023 /* AIRMapMarker.m */,
 				1125B2CD1C4AD3DA007D0023 /* AIRMapMarkerManager.h */,
 				1125B2CE1C4AD3DA007D0023 /* AIRMapMarkerManager.m */,
 				1125B2CF1C4AD3DA007D0023 /* AIRMapPolygon.h */,
@@ -328,6 +351,15 @@
 			name = AirGoogleMaps;
 			sourceTree = "<group>";
 		};
+		F23A22A025B68433004C71E3 /* AirMaps-tvos */ = {
+			isa = PBXGroup;
+			children = (
+				F23A22A125B68433004C71E3 /* AirMaps_tvos.h */,
+				F23A22A225B68433004C71E3 /* AirMaps_tvos.m */,
+			);
+			path = "AirMaps-tvos";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -348,6 +380,23 @@
 			productReference = 11FA5C511C4A1296003AC2EE /* libAirMaps.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		F23A229E25B68433004C71E3 /* AirMaps-tvos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F23A22A725B68433004C71E3 /* Build configuration list for PBXNativeTarget "AirMaps-tvos" */;
+			buildPhases = (
+				F23A229B25B68433004C71E3 /* Sources */,
+				F23A229C25B68433004C71E3 /* Frameworks */,
+				F23A229D25B68433004C71E3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AirMaps-tvos";
+			productName = "AirMaps-tvos";
+			productReference = F23A229F25B68433004C71E3 /* libAirMaps-tvos.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -360,6 +409,11 @@
 					11FA5C501C4A1296003AC2EE = {
 						CreatedOnToolsVersion = 7.2;
 					};
+					F23A229E25B68433004C71E3 = {
+						CreatedOnToolsVersion = 12.2;
+						DevelopmentTeam = ZZ3G6DGQEM;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 11FA5C4C1C4A1296003AC2EE /* Build configuration list for PBXProject "AirMaps" */;
@@ -367,6 +421,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 11FA5C481C4A1296003AC2EE;
@@ -375,6 +430,7 @@
 			projectRoot = "";
 			targets = (
 				11FA5C501C4A1296003AC2EE /* AirMaps */,
+				F23A229E25B68433004C71E3 /* AirMaps-tvos */,
 			);
 		};
 /* End PBXProject section */
@@ -402,7 +458,7 @@
 				9B9498CE2017EFB800158761 /* AIRGMSMarker.m in Sources */,
 				9B9498D72017EFB800158761 /* AIRGoogleMapManager.m in Sources */,
 				19DABC7F1E7C9D3C00F41150 /* RCTConvert+AirMap.m in Sources */,
-                A8494E2E218891180092506D /* AIRGoogleMapWMSTileManager.m in Sources */,
+				A8494E2E218891180092506D /* AIRGoogleMapWMSTileManager.m in Sources */,
 				8B19A3C82257BBDF00BB8735 /* AIRMapCalloutSubview.m in Sources */,
 				1125B2E51C4AD3DA007D0023 /* AIRMapPolyline.m in Sources */,
 				4C99C9E12226D8C400A8693E /* AIRWeakMapReference.m in Sources */,
@@ -436,6 +492,14 @@
 				9B9498CC2017EFB800158761 /* AIRGMSPolygon.m in Sources */,
 				1125B2DE1C4AD3DA007D0023 /* AIRMapCircleManager.m in Sources */,
 				1125B2DC1C4AD3DA007D0023 /* AIRMapCalloutManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F23A229B25B68433004C71E3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F23A22A325B68433004C71E3 /* AirMaps_tvos.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +547,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 			};
 			name = Debug;
 		};
@@ -520,6 +585,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -554,6 +620,75 @@
 			};
 			name = Release;
 		};
+		F23A22A525B68433004C71E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ3G6DGQEM;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 14.2;
+			};
+			name = Debug;
+		};
+		F23A22A625B68433004C71E3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = ZZ3G6DGQEM;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 14.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -571,6 +706,15 @@
 			buildConfigurations = (
 				11FA5C5B1C4A1296003AC2EE /* Debug */,
 				11FA5C5C1C4A1296003AC2EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F23A22A725B68433004C71E3 /* Build configuration list for PBXNativeTarget "AirMaps-tvos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F23A22A525B68433004C71E3 /* Debug */,
+				F23A22A625B68433004C71E3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
