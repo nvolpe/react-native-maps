@@ -88,7 +88,11 @@ NSInteger const AIR_CALLOUT_OPEN_ZINDEX_BASELINE = 999;
             _pinView.annotation = self;
         }
 
+
+#if TARGET_OS_IOS
         _pinView.draggable = self.draggable;
+#endif
+
         _pinView.layer.zPosition = self.zIndex;
 
         // TODO(lmr): Looks like this API was introduces in iOS 8. We may want to handle differently for earlier

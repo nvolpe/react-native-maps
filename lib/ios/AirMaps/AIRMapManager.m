@@ -63,7 +63,9 @@ RCT_EXPORT_MODULE()
     
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapLongPress:)];
     UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDrag:)];
+#if TARGET_OS_IOS
     [drag setMinimumNumberOfTouches:1];
+#endif
     // setting this to NO allows the parent MapView to continue receiving marker selection events
     tap.cancelsTouchesInView = NO;
     doubleTap.cancelsTouchesInView = NO;
@@ -876,38 +878,41 @@ static int kDragCenterContext;
 
 - (void)mapView:(AIRMap *)mapView
     annotationView:(MKAnnotationView *)view
-    didChangeDragState:(MKAnnotationViewDragState)newState
-    fromOldState:(MKAnnotationViewDragState)oldState
+//    didChangeDragState:(MKAnnotationViewDragState)newState
+//    fromOldState:(MKAnnotationViewDragState)oldState
 {
-    if (![view.annotation isKindOfClass:[AIRMapMarker class]]) return;
-    AIRMapMarker *marker = (AIRMapMarker *)view.annotation;
-
-    BOOL isPinView = [view isKindOfClass:[MKPinAnnotationView class]];
-
-    id event = @{
-                 @"id": marker.identifier ?: @"unknown",
-                 @"coordinate": @{
-                         @"latitude": @(marker.coordinate.latitude),
-                         @"longitude": @(marker.coordinate.longitude)
-                         }
-                 };
-
-    if (newState == MKAnnotationViewDragStateEnding || newState == MKAnnotationViewDragStateCanceling) {
-        if (!isPinView) {
-            [view setDragState:MKAnnotationViewDragStateNone animated:NO];
-        }
-        if (mapView.onMarkerDragEnd) mapView.onMarkerDragEnd(event);
-        if (marker.onDragEnd) marker.onDragEnd(event);
-
-       if(_hasObserver) [view removeObserver:self forKeyPath:@"center"];
-        _hasObserver = NO;
-    } else if (newState == MKAnnotationViewDragStateStarting) {
-        // MapKit doesn't emit continuous drag events. To get around this, we are going to use KVO.
-        [view addObserver:self forKeyPath:@"center" options:NSKeyValueObservingOptionNew context:&kDragCenterContext];
-        _hasObserver = YES;
-        if (mapView.onMarkerDragStart) mapView.onMarkerDragStart(event);
-        if (marker.onDragStart) marker.onDragStart(event);
-    }
+    
+    // TODO Nick V - Figure out what to do with this function for TVOS support
+    
+//    if (![view.annotation isKindOfClass:[AIRMapMarker class]]) return;
+//    AIRMapMarker *marker = (AIRMapMarker *)view.annotation;
+//
+//    BOOL isPinView = [view isKindOfClass:[MKPinAnnotationView class]];
+//
+//    id event = @{
+//                 @"id": marker.identifier ?: @"unknown",
+//                 @"coordinate": @{
+//                         @"latitude": @(marker.coordinate.latitude),
+//                         @"longitude": @(marker.coordinate.longitude)
+//                         }
+//                 };
+//
+//    if (newState == MKAnnotationViewDragStateEnding || newState == MKAnnotationViewDragStateCanceling) {
+//        if (!isPinView) {
+//            [view setDragState:MKAnnotationViewDragStateNone animated:NO];
+//        }
+//        if (mapView.onMarkerDragEnd) mapView.onMarkerDragEnd(event);
+//        if (marker.onDragEnd) marker.onDragEnd(event);
+//
+//       if(_hasObserver) [view removeObserver:self forKeyPath:@"center"];
+//        _hasObserver = NO;
+//    } else if (newState == MKAnnotationViewDragStateStarting) {
+//        // MapKit doesn't emit continuous drag events. To get around this, we are going to use KVO.
+//        [view addObserver:self forKeyPath:@"center" options:NSKeyValueObservingOptionNew context:&kDragCenterContext];
+//        _hasObserver = YES;
+//        if (mapView.onMarkerDragStart) mapView.onMarkerDragStart(event);
+//        if (marker.onDragStart) marker.onDragStart(event);
+//    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
