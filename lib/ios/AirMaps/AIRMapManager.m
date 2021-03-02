@@ -8,7 +8,6 @@
  */
 
 #import "AIRMapManager.h"
-
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
 #import <React/RCTConvert.h>
@@ -56,31 +55,31 @@ RCT_EXPORT_MODULE()
     map.accessibilityElementsHidden = NO;
     
     // MKMapView doesn't report tap events, so we attach gesture recognizers to it
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapTap:)];
-    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDoubleTap:)];
-    [doubleTap setNumberOfTapsRequired:2];
-    [tap requireGestureRecognizerToFail:doubleTap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapTap:)];
+//    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDoubleTap:)];
+//    [doubleTap setNumberOfTapsRequired:2];
+//    [tap requireGestureRecognizerToFail:doubleTap];
     
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapLongPress:)];
-    UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDrag:)];
-#if TARGET_OS_IOS
-    [drag setMinimumNumberOfTouches:1];
-#endif
+    // UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapLongPress:)];
+    // UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDrag:)];
+// #if TARGET_OS_IOS
+//     [drag setMinimumNumberOfTouches:1];
+// #endif
     // setting this to NO allows the parent MapView to continue receiving marker selection events
-    tap.cancelsTouchesInView = NO;
-    doubleTap.cancelsTouchesInView = NO;
-    longPress.cancelsTouchesInView = NO;
+    // tap.cancelsTouchesInView = NO;
+    // doubleTap.cancelsTouchesInView = NO;
+    // longPress.cancelsTouchesInView = NO;
     
-    doubleTap.delegate = self;
+    // doubleTap.delegate = self;
     
     // disable drag by default
-    drag.enabled = NO;
-    drag.delegate = self;
+    // drag.enabled = NO;
+    // drag.delegate = self;
   
-    [map addGestureRecognizer:tap];
-    [map addGestureRecognizer:doubleTap];
-    [map addGestureRecognizer:longPress];
-    [map addGestureRecognizer:drag];
+    // [map addGestureRecognizer:tap];
+    // [map addGestureRecognizer:doubleTap];
+    // [map addGestureRecognizer:longPress];
+    // [map addGestureRecognizer:drag];
 
     return map;
 }
@@ -882,7 +881,7 @@ static int kDragCenterContext;
 //    fromOldState:(MKAnnotationViewDragState)oldState
 {
     
-    // TODO Nick V - Figure out what to do with this function for TVOS support
+// TODO Nick V - Figure out what to do with this function for TVOS support
     
 //    if (![view.annotation isKindOfClass:[AIRMapMarker class]]) return;
 //    AIRMapMarker *marker = (AIRMapMarker *)view.annotation;

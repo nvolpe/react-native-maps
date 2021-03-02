@@ -30,7 +30,7 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 @interface MKMapView (UIGestureRecognizer)
 
 // this tells the compiler that MKMapView actually implements this method
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+// - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
 
 @end
 
@@ -248,12 +248,12 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 
 // override UIGestureRecognizer's delegate method so we can prevent MKMapView's recognizer from firing
 // when we interact with UIControl subclasses inside our callout view.
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if ([touch.view isDescendantOfView:self.calloutView])
-        return NO;
-    else
-        return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
-}
+// - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//     if ([touch.view isDescendantOfView:self.calloutView])
+//         return NO;
+//     else
+//         return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
+// }
 
 
 // Allow touches to be sent to our calloutview.
