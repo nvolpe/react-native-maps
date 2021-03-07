@@ -30,7 +30,9 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 @interface MKMapView (UIGestureRecognizer)
 
 // this tells the compiler that MKMapView actually implements this method
-// - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch;
+
+
 
 @end
 
@@ -72,10 +74,32 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 
         // Find Apple link label
         for (UIView *subview in self.subviews) {
+            for (UIView *subsubview in subview.subviews) {
+                NSLog(@"Subview >>>>>> ");
+                NSLog(@"%@", subsubview);
+                NSLog(@"Subview ###");
+                // MkAnnotationContainerView
+                    // suppress
+                    // map focused
+//                subsubview.hidden = YES;
+
+                // dig through properties and try and hide or disable user interaction??
+                if ([NSStringFromClass(subsubview.class) isEqualToString:@"MKAnnotationContainerView"]) {
+                    subsubview.hidden = YES;
+                    break;
+                }
+                
+            }
+            
             if ([NSStringFromClass(subview.class) isEqualToString:@"MKAttributionLabel"]) {
                 // This check is super hacky, but the whole premise of moving around
                 // Apple's internal subviews is super hacky
-                _legalLabel = subview;
+//
+//                NSLog(@"Subview >>>>>> ");
+//                NSLog(@"%@", subview);
+//                NSLog(@"Subview >>>>>> ");
+//
+//                _legalLabel = subview;
                 break;
             }
         }
@@ -248,12 +272,16 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 
 // override UIGestureRecognizer's delegate method so we can prevent MKMapView's recognizer from firing
 // when we interact with UIControl subclasses inside our callout view.
-// - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-//     if ([touch.view isDescendantOfView:self.calloutView])
-//         return NO;
-//     else
-//         return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
-// }
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+//    if ([touch.view isDescendantOfView:self.calloutView])
+//        return NO;
+//    else
+//        return [super gestureRecognizer:gestureRecognizer shouldReceiveTouch:touch];
+//}
+
+//UITapGestureRecognizer *tapGestureRec = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(PlayPause)];
+//tapGestureRec.allowedPressTypes = @[@(UIPressTypePlayPause)];
+//[self.view addGestureRecognizer:tapGestureRec];
 
 
 // Allow touches to be sent to our calloutview.
@@ -370,10 +398,12 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 
 - (void)setHandlePanDrag:(BOOL)handleMapDrag {
     for (UIGestureRecognizer *recognizer in [self gestureRecognizers]) {
-        if ([recognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
-            recognizer.enabled = handleMapDrag;
-            break;
-        }
+        recognizer.enabled = handleMapDrag;
+
+//        if ([recognizer isKindOfClass:[UIPanGestureRecognizer class]]) {
+//            recognizer.enabled = handleMapDrag;
+//            break;
+//        }
     }
 }
 
@@ -475,6 +505,9 @@ const NSInteger AIRMapMaxZoomLevel = 20;
 }
 
 - (void)setShowsScale:(BOOL)showsScale {
+//    for (UIGestureRecognizer *recognizer in [self gestureRecognizers]) {
+//        recognizer.enabled = NO;
+//    }
     if ([MKMapView instancesRespondToSelector:@selector(setShowsScale:)]) {
         [super setShowsScale:showsScale];
     }

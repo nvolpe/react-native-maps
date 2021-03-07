@@ -8,6 +8,7 @@
  */
 
 #import "AIRMapManager.h"
+
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
 #import <React/RCTConvert.h>
@@ -51,35 +52,35 @@ RCT_EXPORT_MODULE()
     AIRMap *map = [AIRMap new];
     map.delegate = self;
 
-    map.isAccessibilityElement = NO;
-    map.accessibilityElementsHidden = NO;
-    
+//    map.isAccessibilityElement = NO;
+//    map.accessibilityElementsHidden = NO;
+//
     // MKMapView doesn't report tap events, so we attach gesture recognizers to it
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapTap:)];
 //    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDoubleTap:)];
 //    [doubleTap setNumberOfTapsRequired:2];
 //    [tap requireGestureRecognizerToFail:doubleTap];
     
-    // UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapLongPress:)];
-    // UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDrag:)];
-// #if TARGET_OS_IOS
-//     [drag setMinimumNumberOfTouches:1];
-// #endif
-    // setting this to NO allows the parent MapView to continue receiving marker selection events
-    // tap.cancelsTouchesInView = NO;
-    // doubleTap.cancelsTouchesInView = NO;
-    // longPress.cancelsTouchesInView = NO;
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapLongPress:)];
+//    UIPanGestureRecognizer *drag = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMapDrag:)];
+//#if TARGET_OS_IOS
+//    [drag setMinimumNumberOfTouches:1];
+//#endif
+//    // setting this to NO allows the parent MapView to continue receiving marker selection events
+//    tap.cancelsTouchesInView = YES;
+//    doubleTap.cancelsTouchesInView = NO;
+//    longPress.cancelsTouchesInView = NO;
     
-    // doubleTap.delegate = self;
-    
-    // disable drag by default
-    // drag.enabled = NO;
-    // drag.delegate = self;
-  
-    // [map addGestureRecognizer:tap];
-    // [map addGestureRecognizer:doubleTap];
-    // [map addGestureRecognizer:longPress];
-    // [map addGestureRecognizer:drag];
+//    doubleTap.delegate = self;
+//
+//    // disable drag by default
+//    drag.enabled = NO;
+//    drag.delegate = self;
+//
+//    [map addGestureRecognizer:tap];
+//    [map addGestureRecognizer:doubleTap];
+//    [map addGestureRecognizer:longPress];
+//    [map addGestureRecognizer:drag];
 
     return map;
 }
@@ -881,7 +882,7 @@ static int kDragCenterContext;
 //    fromOldState:(MKAnnotationViewDragState)oldState
 {
     
-// TODO Nick V - Figure out what to do with this function for TVOS support
+    // TODO Nick V - Figure out what to do with this function for TVOS support
     
 //    if (![view.annotation isKindOfClass:[AIRMapMarker class]]) return;
 //    AIRMapMarker *marker = (AIRMapMarker *)view.annotation;
@@ -1154,13 +1155,13 @@ static int kDragCenterContext;
 
 + (double)latitudeToPixelSpaceY:(double)latitude
 {
-	if (latitude == 90.0) {
-		return 0;
-	} else if (latitude == -90.0) {
-		return MERCATOR_OFFSET * 2;
-	} else {
-		return round(MERCATOR_OFFSET - MERCATOR_RADIUS * logf((1 + sinf(latitude * M_PI / 180.0)) / (1 - sinf(latitude * M_PI / 180.0))) / 2.0);
-	}
+    if (latitude == 90.0) {
+        return 0;
+    } else if (latitude == -90.0) {
+        return MERCATOR_OFFSET * 2;
+    } else {
+        return round(MERCATOR_OFFSET - MERCATOR_RADIUS * logf((1 + sinf(latitude * M_PI / 180.0)) / (1 - sinf(latitude * M_PI / 180.0))) / 2.0);
+    }
 }
 
 + (double)pixelSpaceXToLongitude:(double)pixelX
@@ -1236,57 +1237,57 @@ static int kDragCenterContext;
                                 centerCoordinate:(CLLocationCoordinate2D)centerCoordinate
                                     andZoomLevel:(double)zoomLevel
 {
-	// clamp lat/long values to appropriate ranges
-	centerCoordinate.latitude = MIN(MAX(-90.0, centerCoordinate.latitude), 90.0);
-	centerCoordinate.longitude = fmod(centerCoordinate.longitude, 180.0);
+    // clamp lat/long values to appropriate ranges
+    centerCoordinate.latitude = MIN(MAX(-90.0, centerCoordinate.latitude), 90.0);
+    centerCoordinate.longitude = fmod(centerCoordinate.longitude, 180.0);
 
-	// convert center coordiate to pixel space
-	double centerPixelX = [AIRMapManager longitudeToPixelSpaceX:centerCoordinate.longitude];
-	double centerPixelY = [AIRMapManager latitudeToPixelSpaceY:centerCoordinate.latitude];
+    // convert center coordiate to pixel space
+    double centerPixelX = [AIRMapManager longitudeToPixelSpaceX:centerCoordinate.longitude];
+    double centerPixelY = [AIRMapManager latitudeToPixelSpaceY:centerCoordinate.latitude];
 
-	// determine the scale value from the zoom level
-	double zoomExponent = AIRMapMaxZoomLevel - zoomLevel;
-	double zoomScale = pow(2, zoomExponent);
+    // determine the scale value from the zoom level
+    double zoomExponent = AIRMapMaxZoomLevel - zoomLevel;
+    double zoomScale = pow(2, zoomExponent);
 
-	// scale the map’s size in pixel space
-	CGSize mapSizeInPixels = mapView.bounds.size;
-	double scaledMapWidth = mapSizeInPixels.width * zoomScale;
-	double scaledMapHeight = mapSizeInPixels.height * zoomScale;
+    // scale the map’s size in pixel space
+    CGSize mapSizeInPixels = mapView.bounds.size;
+    double scaledMapWidth = mapSizeInPixels.width * zoomScale;
+    double scaledMapHeight = mapSizeInPixels.height * zoomScale;
 
-	// figure out the position of the left pixel
-	double topLeftPixelX = centerPixelX - (scaledMapWidth / 2);
+    // figure out the position of the left pixel
+    double topLeftPixelX = centerPixelX - (scaledMapWidth / 2);
 
-	// find delta between left and right longitudes
-	CLLocationDegrees minLng = [AIRMapManager pixelSpaceXToLongitude:topLeftPixelX];
-	CLLocationDegrees maxLng = [AIRMapManager pixelSpaceXToLongitude:topLeftPixelX + scaledMapWidth];
-	CLLocationDegrees longitudeDelta = maxLng - minLng;
+    // find delta between left and right longitudes
+    CLLocationDegrees minLng = [AIRMapManager pixelSpaceXToLongitude:topLeftPixelX];
+    CLLocationDegrees maxLng = [AIRMapManager pixelSpaceXToLongitude:topLeftPixelX + scaledMapWidth];
+    CLLocationDegrees longitudeDelta = maxLng - minLng;
 
-	// if we’re at a pole then calculate the distance from the pole towards the equator
-	// as MKMapView doesn’t like drawing boxes over the poles
-	double topPixelY = centerPixelY - (scaledMapHeight / 2);
-	double bottomPixelY = centerPixelY + (scaledMapHeight / 2);
-	BOOL adjustedCenterPoint = NO;
-	if (topPixelY > MERCATOR_OFFSET * 2) {
-		topPixelY = centerPixelY - scaledMapHeight;
-		bottomPixelY = MERCATOR_OFFSET * 2;
-		adjustedCenterPoint = YES;
-	}
+    // if we’re at a pole then calculate the distance from the pole towards the equator
+    // as MKMapView doesn’t like drawing boxes over the poles
+    double topPixelY = centerPixelY - (scaledMapHeight / 2);
+    double bottomPixelY = centerPixelY + (scaledMapHeight / 2);
+    BOOL adjustedCenterPoint = NO;
+    if (topPixelY > MERCATOR_OFFSET * 2) {
+        topPixelY = centerPixelY - scaledMapHeight;
+        bottomPixelY = MERCATOR_OFFSET * 2;
+        adjustedCenterPoint = YES;
+    }
 
-	// find delta between top and bottom latitudes
-	CLLocationDegrees minLat = [AIRMapManager pixelSpaceYToLatitude:topPixelY];
-	CLLocationDegrees maxLat = [AIRMapManager pixelSpaceYToLatitude:bottomPixelY];
-	CLLocationDegrees latitudeDelta = -1 * (maxLat - minLat);
+    // find delta between top and bottom latitudes
+    CLLocationDegrees minLat = [AIRMapManager pixelSpaceYToLatitude:topPixelY];
+    CLLocationDegrees maxLat = [AIRMapManager pixelSpaceYToLatitude:bottomPixelY];
+    CLLocationDegrees latitudeDelta = -1 * (maxLat - minLat);
 
-	// create and return the lat/lng span
-	MKCoordinateSpan span = MKCoordinateSpanMake(latitudeDelta, longitudeDelta);
-	MKCoordinateRegion region = MKCoordinateRegionMake(centerCoordinate, span);
-	// once again, MKMapView doesn’t like drawing boxes over the poles
-	// so adjust the center coordinate to the center of the resulting region
-	if (adjustedCenterPoint) {
-		region.center.latitude = [AIRMapManager pixelSpaceYToLatitude:((bottomPixelY + topPixelY) / 2.0)];
-	}
+    // create and return the lat/lng span
+    MKCoordinateSpan span = MKCoordinateSpanMake(latitudeDelta, longitudeDelta);
+    MKCoordinateRegion region = MKCoordinateRegionMake(centerCoordinate, span);
+    // once again, MKMapView doesn’t like drawing boxes over the poles
+    // so adjust the center coordinate to the center of the resulting region
+    if (adjustedCenterPoint) {
+        region.center.latitude = [AIRMapManager pixelSpaceYToLatitude:((bottomPixelY + topPixelY) / 2.0)];
+    }
 
-	return region;
+    return region;
 }
 
 - (double) zoomLevel:(AIRMap *)mapView {
